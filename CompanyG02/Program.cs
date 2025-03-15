@@ -202,8 +202,15 @@ namespace CompanyG02
                     Console.WriteLine($"{item.e.Name} : {item.d.Name}");
                 }
 
-            }
 
+                var result = context.EmployeeDepartmentsView;
+
+                foreach (var item in result)
+                {
+                    Console.WriteLine($"Employee ID: {item.EmployeeId}, Employee Name: {item.EmployeeName}, Department ID: {item.Departmentid}, Department Name: {item.DepartmentName}");
+                }
+
+            }
 
         }
     }

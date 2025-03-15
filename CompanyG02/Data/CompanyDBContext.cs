@@ -39,10 +39,15 @@ namespace CompanyG02.Data
 
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            modelBuilder.Entity<EmployeesDepartment>().ToView("EmployeeDepartmentsView").HasNoKey();
         }
 
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
+
+        public DbSet<EmployeesDepartment> EmployeeDepartmentsView { get; set; }
+
         //public DbSet<Product> Products { get; set; }
         //public DbSet<Project> Projects { get; set; }
 

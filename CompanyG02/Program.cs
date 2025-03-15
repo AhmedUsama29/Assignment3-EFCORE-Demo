@@ -157,18 +157,50 @@ namespace CompanyG02
                     context.Employees,
                     d => d.DepartmentId,
                     e => e.DepartmentId,
-                    (department, employees) => new 
+                    (department, employees) => new
                     { department
-                      ,employees 
+                      ,employees = employees.DefaultIfEmpty()
                     }
-                    ).SelectMany(gColl => gColl.employees, (gColl, emp) => new { gColl.department, emp });
+                    ).SelectMany(gColl => gColl.employees, (gColl, emp) => new 
+                    { 
+                        d = gColl.department
+                        , emp 
+                    });
 
                 foreach (var item in groupJoinRes02)
                 {
-                    Console.WriteLine($"Employee: {item.emp.Id}, {item.emp.Name}, Department: {item.department.DepartmentId}, {item.department.Name}");
+                    Console.WriteLine($"{item.d.Name} : {item.emp?.Name ?? "No Emp"}");
+                }
+
+                groupJoinRes02 = from d in context.Departments
+                                 join e in context.Employees
+                                 on d.DepartmentId equals e.DepartmentId into employees
+                                 from emp in employees.DefaultIfEmpty()
+                                 select new
+                                 {
+                                     d
+                                    ,
+                                     emp
+                                 };
+
+                foreach (var item in groupJoinRes02)
+                {
+                    Console.WriteLine($"{item.d.Name} : {item.emp?.Name ?? "No Emp"}");
                 }
 
 
+                var crossJoin = from d in context.Departments
+                                from e in context.Employees
+                                select new
+                                {
+                                    e,
+                                    d
+                                };
+
+                foreach (var item in crossJoin)
+                {
+                    Console.WriteLine($"{item.e.Name} : {item.d.Name}");
+                }
 
             }
 

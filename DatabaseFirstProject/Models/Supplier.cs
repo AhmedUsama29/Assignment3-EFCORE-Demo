@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CompanyG02.Models;
+namespace DatabaseFirstProject.Models;
 
 public partial class Supplier
 {

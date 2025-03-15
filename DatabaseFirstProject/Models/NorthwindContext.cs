@@ -4,12 +4,11 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace CompanyG02.Models;
+namespace DatabaseFirstProject.Models;
 
 public partial class NorthwindContext : DbContext
 {
-    public NorthwindContext(DbContextOptions<NorthwindContext> options)
-        : base(options)
+    public NorthwindContext()
     {
     }
 
